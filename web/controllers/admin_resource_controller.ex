@@ -18,7 +18,7 @@ defmodule ExAdmin.AdminResourceController do
       page ->
         page
     end
-    scope_counts = model.run_query_counts repo(), defn, :index, params |> Map.to_list
+    scope_counts = model.run_query_counts conn, repo(), defn, :index, params |> Map.to_list
 
     {conn, _params, page} = handle_after_filter(conn, :index, defn, params, page)
 

@@ -9,8 +9,8 @@ config :ex_admin, TestExAdmin.Endpoint,
 
 config :ex_admin, TestExAdmin.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "rails",
+  password: "rails",
   database: "ex_admin_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
