@@ -58,16 +58,19 @@
         <%= ExAdmin.Navigation.nav_view(@conn) %>
       <% end %>
 
-      <% actions = ExAdmin.get_title_actions(@conn) %>
-      <%= if any_actions?(actions) do %>
-        <li class="header text-uppercase"><%= gettext "Actions" %></li>
-        <%= for {action, opts} <- actions do %>
-          <li>
-            <% opts = build_menu_icon(action, opts) %>
-            <%= build_link(action, opts) %>
-          </li>
-        <% end %>
+      <%= if Phoenix.Controller.action_name(@conn) != :show do %>
+          <% actions = ExAdmin.get_title_actions(@conn) %>
+          <%= if any_actions?(actions) do %>
+            <li class="header text-uppercase"><%= gettext "Actions" %></li>
+            <%= for {action, opts} <- actions do %>
+              <li>
+                <% opts = build_menu_icon(action, opts) %>
+                <%= build_link(action, opts) %>
+              </li>
+            <% end %>
+          <% end %>
       <% end %>
+
       <%= if @scope_counts && Enum.count(@scope_counts) > 0 do %>
         <li class="header text-uppercase"><%= gettext "Scopes" %></li>
       <% end %>

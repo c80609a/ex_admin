@@ -253,10 +253,10 @@ defmodule ExAdmin.Register do
         |> ExAdmin.Query.run_query(repo, defn, action, id, @query)
       end
 
-      def run_query_counts(repo, defn, action, id \\ nil) do
+      def run_query_counts(conn, repo, defn, action, id \\ nil) do
         %__MODULE__{}
         |> Map.get(:resource_model)
-        |> ExAdmin.Query.run_query_counts(repo, defn, action, id, @query)
+        |> ExAdmin.Query.run_query_counts(repo, defn, action, id, @query, conn)
       end
 
       def build_admin_search_query(keywords) do
