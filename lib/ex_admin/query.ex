@@ -25,11 +25,15 @@ defmodule ExAdmin.Query do
   end
 
   @doc false
-  def run_query_counts(resource_model, repo, defn, _action, params, _query_opts) do
+  def run_query_counts(resource_model, repo, defn, action, params, _query_opts, conn) do
     for {name, _opts} <- defn.scopes do
-      resource_model
-      |> scope_where(defn.scopes, name)
-      |> ExQueb.filter(params)
+      query =
+        resource_model
+        |> scope_where(defn.scopes, name)
+        |> ExQueb.filter(params)
+
+      conn.assigns.resource
+      |> ExAdmin.Authorization.authorize_query(conn, query, action, nil)
       |> count_q(repo, name)
     end
   end
