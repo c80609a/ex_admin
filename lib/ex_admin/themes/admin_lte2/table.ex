@@ -27,7 +27,7 @@ defmodule ExAdmin.Theme.AdminLte2.Table do
       div ".box-header.with-border" do
         h3(
           schema[:name] ||
-            gettext("%{resource_model} DDDetails", resource_model: Utils.humanize(resource_model))
+            gettext("%{resource_model} Details", resource_model: Utils.humanize(resource_model))
         )
       end
 
