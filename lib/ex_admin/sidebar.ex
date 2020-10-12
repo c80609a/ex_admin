@@ -63,4 +63,19 @@ defmodule ExAdmin.Sidebar do
       other -> other
     end
   end
+
+  @doc """
+  С помощью `my_optz` можно управлять видимостью стандартной панели действий над ресурсом.
+
+  register_resource Payout do
+    my_optz %{sidebar: %{show: %{visible_actions: false}}}
+  end
+  """
+  def visible_actions?(conn) do
+    action = Phoenix.Controller.action_name(conn)
+    ops    = conn.assigns.defn.my_optz
+
+    res = ops[:sidebar][action][:visible_actions]
+    if is_nil(res), do: true, else: res
+  end
 end

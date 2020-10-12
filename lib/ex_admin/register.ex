@@ -118,6 +118,7 @@ defmodule ExAdmin.Register do
       Module.put_attribute(__MODULE__, :changesets, [])
       Module.put_attribute(__MODULE__, :update_changeset, :changeset)
       Module.put_attribute(__MODULE__, :create_changeset, :changeset)
+      Module.put_attribute(__MODULE__, :my_optz, %{})
 
       @name_column Module.get_attribute(__MODULE__, :name_column) ||
                      apply(ExAdmin.Helpers, :get_name_field, [module])
@@ -221,6 +222,12 @@ defmodule ExAdmin.Register do
           :collection_actions
         )
 
+      my_optz =
+        case Module.get_attribute(__MODULE__, :my_optz) do
+          nil -> %{}
+          options -> options
+        end
+
       defstruct controller: @controller,
                 controller_methods: Module.get_attribute(__MODULE__, :controller_methods),
                 title_actions: &ExAdmin.default_resource_title_actions/2,
@@ -240,6 +247,7 @@ defmodule ExAdmin.Register do
                 position_column: Module.get_attribute(__MODULE__, :position_column),
                 name_column: @name_column,
                 batch_actions: Module.get_attribute(__MODULE__, :batch_actions),
+                my_optz: my_optz,
                 changesets: Module.get_attribute(__MODULE__, :changesets),
                 plugs: plugs,
                 sidebars: sidebars,
@@ -1129,6 +1137,12 @@ defmodule ExAdmin.Register do
   defmacro batch_actions(false) do
     quote do
       Module.put_attribute(__MODULE__, :batch_actions, false)
+    end
+  end
+
+  defmacro my_optz(opts) do
+    quote do
+      Module.put_attribute(__MODULE__, :my_optz, unquote(opts))
     end
   end
 

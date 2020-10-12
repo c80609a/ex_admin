@@ -58,7 +58,7 @@
         <%= ExAdmin.Navigation.nav_view(@conn) %>
       <% end %>
 
-      <%= if Phoenix.Controller.action_name(@conn) != :show do %>
+      <%= if ExAdmin.Sidebar.visible_actions?(@conn) do %>
           <% actions = ExAdmin.get_title_actions(@conn) %>
           <%= if any_actions?(actions) do %>
             <li class="header text-uppercase"><%= gettext "Actions" %></li>
