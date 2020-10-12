@@ -73,7 +73,7 @@ defmodule ExAdmin.Sidebar do
   """
   def visible_actions?(conn) do
     action = Phoenix.Controller.action_name(conn)
-    ops    = conn.assigns.defn.my_optz
+    ops    = Map.get conn.assigns.defn, :my_optz
 
     res = ops[:sidebar][action][:visible_actions]
     if is_nil(res), do: true, else: res
