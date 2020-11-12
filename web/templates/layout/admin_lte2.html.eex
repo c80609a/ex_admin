@@ -71,6 +71,7 @@
     <!-- Bootstrap 3.3.5 -->
     <script src='<%= static_url(@conn, "/js/ex_admin_common.js") %>'></script>
     <script src='<%= static_url(@conn, "/js/admin_lte2.js") %>'></script>
+    <script src='<%= static_url(@conn, "/js/admin.js") %>'></script>
   </body>
   <script type="text/javascript">
     $(function() {
